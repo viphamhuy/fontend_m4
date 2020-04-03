@@ -1,0 +1,140 @@
+<div class="wrapper">
+  <app-side-bar-user></app-side-bar-user>
+
+  <div id="content">
+
+    <div class="row ">
+
+      <div class="col-12 col-lg-6 card-box">
+        <a href="#">
+          <div class="padding-border">
+            <h5>Management List</h5>
+            <div class="col-12 clearfix ">
+              <a routerLink="/show-detail-user/{{id}}">
+                <div class="col-6 float-left">
+                  <i style="width: 100%" class="indigo-text text-lighten-1 large material-icons">store</i>
+                  <p class="col-6-span">User Details</p>
+                </div>
+              </a>
+              <div class="col-6 float-left">
+                <i  style="width: 100%"  class="indigo-text text-lighten-1 large material-icons">assignment</i>
+                <p class="col-6-span">Products List</p>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-12 col-lg-6 card-box">
+        <a href="#">
+          <div class="padding-border">
+            <h5>Category Management</h5>
+            <div class="col-12 clearfix ">
+              <div class="col-6 float-left">
+                <i style="width: 100%" class="indigo-text text-lighten-1 large material-icons">view_list</i>
+                <p class="col-6-span">Category</p>
+              </div>
+              <div class="col-6 float-left">
+                <i  style="width: 100%"  class="indigo-text text-lighten-1 large material-icons">view_list</i>
+                <p class="col-6-span">Sub Category</p>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="container bootstrap snippet">
+      <br>
+      <h1>User Details</h1>
+      <div class="panel-body inf-content">
+        <div class="row">
+          <div class="col-md-4">
+            <img src="{{urlHaiLit}}" style="width:600px;height: 350px" title="" class="img-circle img-thumbnail isTooltip"   data-original-title="Usuario">
+          </div>
+          <div class="col-md-6">
+            <strong>Information</strong><br><br>
+            <div class="table-responsive">
+              <table class="table table-condensed ">
+                <tr>
+                  <td>
+                    <strong>
+                      <span class="fas fa-user text-primary"></span>
+                      Full Name
+                    </strong>
+                  </td>
+                  <td class="text-primary">
+                    {{listUser.hoTen}}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>
+                      <span class="fas fa-globe  text-primary"></span>
+                      Address
+                    </strong>
+                  </td>
+                  <td class="text-primary">
+                    {{listUser.diaChi}}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <strong>
+                      <span class="fas fa-address-card  text-primary"></span>
+                      User Name
+                    </strong>
+                  </td>
+                  <td class="text-primary">
+                    {{listUser.userName}}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <strong>
+                      <span class="fas fa-lock  text-primary"></span>
+                      Password
+                    </strong>
+                  </td>
+                  <td class="text-primary">
+                    {{listUser.password}}
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <strong>
+                      <span class="fas fa-edit  text-primary"></span>
+                      Edit
+                    </strong>
+                  </td>
+                  <td class="text-primary">
+                    <button class="btn-primary" routerLink="/edit-user/1">Sửa thông tin</button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td>
+                    <strong>
+                      <span class="fas fa-times  text-primary"></span>
+                      Action
+                    </strong>
+                  </td>
+                  <td class="text-primary">
+                    <button class="btn-danger" routerLink="/login">Đăng xuất</button>
+                  </td>
+                </tr>
+
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <
+
+</div>
+</div>
