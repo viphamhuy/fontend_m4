@@ -1,3 +1,5 @@
+
+<body>
 <div class="wrapper">
   <app-side-bar-user></app-side-bar-user>
 
@@ -53,15 +55,17 @@
                 </div>
               </div>
 
-                <div class=" clearfix col-lg-3 col-md-4 col-6 float-left"  *ngFor="let image of listHouse.picture">
 
-                    <div class="img-galary">
-                      <p class="d-block mb-4 h-100">
-                        <img class="img-fluid img-thumbnail"[src]="image.tenAnh" alt="">
-                      </p>
-                    </div>
+              <div class="w3-content w3-display-container">
+                <img [src]="image.tenAnh" class="mySlides w3-animate-left" style="width:100%" *ngFor="let image of listHouse.picture">
+                <div style="text-align:center">
+                  <span class="dot" *ngFor="let image of listHouse.picture"></span>
+                </div>
 
-                  </div>
+                <button class="w3-button w3-black w3-display-left" onclick="plusSlides(-1)">&#10094;</button>
+                <button class="w3-button w3-black w3-display-right" onclick="plusSlides(1)">&#10095;</button>
+              </div>
+
 
             </div>
           </div>
@@ -72,3 +76,8 @@
 </div>
   </div>
 </div>
+
+
+
+</body>
+

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ComponentsService} from '../../components.service';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Route, Router} from '@angular/router';
-import {redirectUnauthorizedTo} from '@angular/fire/auth-guard';
+
 
 
 
@@ -13,12 +13,7 @@ import {redirectUnauthorizedTo} from '@angular/fire/auth-guard';
 })
 export class LoginComponent implements OnInit {
 
-  formGroupSignUp = new FormGroup({
-    userName: new FormControl(),
-    password: new FormControl(),
-    hoTen: new FormControl(),
-    diaChi: new FormControl()
-  });
+
   formGroup = new FormGroup({
     userName: new FormControl(),
     password: new FormControl()
@@ -29,32 +24,12 @@ export class LoginComponent implements OnInit {
   message = '';
   isShow = false;
   isSuccess = true;
-  isLoading = false;
+
   constructor(private componentsService: ComponentsService, private route: Router) { }
 
   ngOnInit(): void {
     this.componentsService.listUser().subscribe( result => {
       this.listUser = result;
-    });
-  }
-  save() {
-    this.isLoading = true;
-    const userName = this.formGroupSignUp.get('userName').value;
-    const password = this.formGroupSignUp.get('password').value;
-    const hoTen = this.formGroupSignUp.get('hoTen').value;
-    const diaChi = this.formGroupSignUp.get('diaChi').value;
-    this.componentsService.addUser(userName, password, hoTen, diaChi).subscribe( result => {
-      this.isShow = true;
-      this.isSuccess = true;
-      this.message = 'Đăng kí thành công, hãy quay lại để đăng nhập!';
-      this.formGroup.reset();
-    }, error => {
-      this.isShow = true;
-      this.isSuccess = false;
-      this.message = 'Đăng kí thất bại!';
-      alert('fail')
-      this.isLoading = false;
-      this.formGroup.reset();
     });
   }
   checkUser() {

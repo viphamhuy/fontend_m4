@@ -6,7 +6,7 @@ $(document).on('change','.up', function(){
   for (var i = 0; i < $(this).get(0).files.length; ++i) {
     names.push($(this).get(0).files[i].name);
   }
-  // $("input[name=file]").val(names);
+
   if(length>1){
     const fileName = names.join(', ');
     $(this).closest('.form-group').find('.form-control').attr("value",length+" files selected");
@@ -16,4 +16,11 @@ $(document).on('change','.up', function(){
   }
 });
 });
+
+
+
+
+
+
+
 

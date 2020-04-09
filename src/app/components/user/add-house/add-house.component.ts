@@ -14,6 +14,9 @@ declare const myTest: any;
   styleUrls: ['./add-house.component.scss']
 })
 export class AddHouseComponent implements OnInit {
+
+
+
   myItems: File[] = [];
   categoryHouseList: any[];
   categoryRoomList: any[];
@@ -133,5 +136,7 @@ export class AddHouseComponent implements OnInit {
   onClick(){
     myTest();
   }
+
+
 
 }

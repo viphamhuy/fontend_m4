@@ -23,24 +23,24 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  // save() {
-  //   this.isLoading = true;
-  //   const userName = this.formGroup.get('userName').value;
-  //   const password = this.formGroup.get('password').value;
-  //   const hoTen = this.formGroup.get('hoTen').value;
-  //   const diaChi = this.formGroup.get('diaChi').value;
-  //   this.componentsService.addUser(userName, password, hoTen, diaChi).subscribe( result => {
-  //     this.isShow = true;
-  //     this.isSuccess = true;
-  //     this.message = 'Đăng kí thành công!';
-  //     this.formGroup.reset();
-  //   }, error => {
-  //     this.isShow = true;
-  //     this.isSuccess = false;
-  //     this.message = 'Đăng kí thất bại!';
-  //     this.isLoading = false;
-  //     this.formGroup.reset();
-  //   });
-  // }
+  save() {
+    this.isLoading = true;
+    const userName = this.formGroup.get('userName').value;
+    const password = this.formGroup.get('password').value;
+    const hoTen = this.formGroup.get('hoTen').value;
+    const diaChi = this.formGroup.get('diaChi').value;
+    this.componentsService.addUser(userName, password, hoTen, diaChi).subscribe( result => {
+      this.isShow = true;
+      this.isSuccess = true;
+      this.message = 'Đăng kí thành công!';
+      this.formGroup.reset();
+    }, error => {
+      this.isShow = true;
+      this.isSuccess = false;
+      this.message = 'Đăng kí thất bại!';
+      this.isLoading = false;
+      this.formGroup.reset();
+    });
+  }
 
 }

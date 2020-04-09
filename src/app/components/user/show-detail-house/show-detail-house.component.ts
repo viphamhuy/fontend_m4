@@ -3,6 +3,8 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {ComponentsService} from '../../components.service';
 import {ActivatedRoute} from '@angular/router';
 
+
+
 @Component({
   selector: 'app-show-detail-house',
   templateUrl: './show-detail-house.component.html',
@@ -31,5 +33,6 @@ export class ShowDetailHouseComponent implements OnInit {
       });
     });
   }
+
 
 }

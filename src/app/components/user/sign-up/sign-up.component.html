@@ -1,43 +1,50 @@
+<body>
+<div class="container register-form">
+  <form [formGroup]="formGroup" (ngSubmit)="save()">
+  <div class="form">
+    <div class="note">
+      <p>SimpleRegister form </p>
+    </div>
 
-<!--<div class="col-sm-4">-->
-<!--  <div class="col-3">-->
-<!--    <button class="btn btn-primary"  routerLink="">Quay về</button>-->
-<!--  </div>-->
-<!--  <div class="col-6">-->
-<!--    <div *ngIf="isShow"-->
-<!--         class="alert {{ (isSuccess) ? 'alert-success' : 'alert-danger' }}"-->
-<!--         role="alert">-->
-<!--      {{message}}-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-<!--&lt;!&ndash;<form [formGroup]="formGroup" (ngSubmit)="save()">&ndash;&gt;-->
-<!--  <div class="row">-->
-<!--    <div class="col-sm-4"></div>-->
-<!--    <div class="col-sm-4">-->
-<!--      <div class="form-group">-->
-<!--        <label for="name">Họ tên</label>-->
-<!--        <input type="email" class="form-control" id="name" formControlName="hoTen" aria-describedby="emailHelp">-->
-<!--      </div>-->
-<!--      <div class="form-group">-->
-<!--        <label for="address">Địa chỉ</label>-->
-<!--        <input type="email" class="form-control" id="address" formControlName="diaChi" aria-describedby="emailHelp">-->
-<!--      </div>-->
-<!--      <div class="form-group">-->
-<!--        <label for="exampleInputEmail1">User Name</label>-->
-<!--        <input type="email" class="form-control" id="exampleInputEmail1" formControlName="userName" aria-describedby="emailHelp">-->
-<!--      </div>-->
-<!--      <div class="form-group">-->
-<!--        <label for="exampleInputPassword1">Password</label>-->
-<!--        <input type="password" class="form-control" formControlName="password" id="exampleInputPassword1">-->
-<!--      </div>-->
-<!--      <div class="form-group form-check">-->
-<!--        <input type="checkbox" class="form-check-input" id="exampleCheck1">-->
-<!--        <label class="form-check-label" for="exampleCheck1">Check me out</label>-->
-<!--      </div>-->
-<!--      <button type="submit" class="btn btn-primary">Đăng kí</button>-->
-<!--    </div>-->
-<!--    <div class="col-sm-4"></div>-->
-<!--  </div>-->
-<!--&lt;!&ndash;</form>&ndash;&gt;-->
+    <div class="form-content">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <i class="fas fa-user prefix"></i>
+            <label for="name">Full Name</label>
+            <input id="name"  formControlName="hoTen" type="text" class="form-control" placeholder="Your Name *" value=""/>
+          </div>
+          <div class="form-group">
+            <i class="fas fa-globe prefix"></i>
+            <label for="address">Address</label>
+            <input type="text"  id="address" formControlName="diaChi"  class="form-control" placeholder="Your Address *" value=""/>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <i class="fas fa-envelope prefix"></i>
+            <label for="exampleInputEmail">User Name</label>
+            <input type="text"  id="exampleInputEmail" formControlName="userName" class="form-control" placeholder="Your User Name" value=""/>
+          </div>
+          <div class="form-group">
+            <i class="fas fa-lock prefix"></i>
+            <label for="exampleInputPassword">PassWord</label>
+            <input type="text" id="exampleInputPassword" formControlName="password" class="form-control" placeholder="Your Password" value=""/>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btnSubmit">Submit</button>
+      <div *ngIf="isShow"
+           class="alert {{ (isSuccess) ? 'alert-success' : 'alert-danger' }}"
+           role="alert">
+        {{message}}
+      </div>
+      <div style="margin-top: 20px">
+        <a style="color: white;font-weight: bold" href="#">Back</a>
+      </div>
+    </div>
+  </div>
+  </form>
+</div>
 
+</body>
