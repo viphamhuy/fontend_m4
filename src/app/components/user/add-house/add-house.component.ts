@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {ComponentsService} from '../../components.service';
 import {AngularFireDatabase} from '@angular/fire/database';
 import * as firebase from 'firebase';
-import {Picture} from '../picture';
 import {ActivatedRoute} from '@angular/router';
+import {IHouse} from '../../../interface/house';
+import {Picture} from '../../../interface/picture';
 
 declare const myTest: any;
 
@@ -22,6 +23,27 @@ export class AddHouseComponent implements OnInit {
   categoryRoomList: any[];
   idHost: string;
   hostList: any;
+  house: IHouse = {
+    tenNha: '',
+    diaChi: '',
+    soLuongPhongNgu: '',
+    soLuongPhongTam: '',
+    moTaChung: '',
+    giaTienTheoDem: 0,
+    trangThai: '',
+    categoryHouse: {
+      id: 0,
+    },
+    categoryRoom: {
+      id: 0,
+    },
+    host: {
+      idChuNha: 0,
+    },
+    picture: [{
+      tenAnh: ''
+    }]
+  };
   formGroup = new FormGroup({
     tenNha: new FormControl(),
     diaChi: new FormControl(),
@@ -30,9 +52,22 @@ export class AddHouseComponent implements OnInit {
     moTaChung: new FormControl(),
     giaTienTheoDem: new FormControl(),
     trangThai: new FormControl(),
-    hostId: new FormControl(),
-    categoryHouseId: new FormControl(),
-    categoryRoomId: new FormControl()
+    categoryHouse: new FormGroup({
+        id: new FormControl(),
+      }
+    ),
+    categoryRoom: new FormGroup({
+        id: new FormControl(),
+      }
+    ),
+    // host: new FormGroup({
+    //   idChuNha: new FormControl(),
+    // }),
+    picture: new FormArray([
+      new FormGroup ({
+        tenAnh: new FormControl(),
+      })
+    ])
   });
   arrayPicture: Picture[] = [];
   message = '';
@@ -50,8 +85,7 @@ export class AddHouseComponent implements OnInit {
       this.idHost = idChuNha;
       console.log(this.idHost);
       this.componentsService.findByIdHost(idChuNha).subscribe(result2 => {
-        this.hostList = result2;
-        this.formGroup.controls.hostId.setValue(this.hostList.idChuNha);
+        this.house.host = result2;
       });
     });
     this.componentsService.listCategoryHouse().subscribe(result => {
@@ -63,19 +97,19 @@ export class AddHouseComponent implements OnInit {
   }
 
   save() {
-    const tenNha = this.formGroup.get('tenNha').value;
-    const diaChi = this.formGroup.get('diaChi').value;
-    const soLuongPhongNgu = this.formGroup.get('soLuongPhongNgu').value;
-    const soLuongPhongTam = this.formGroup.get('soLuongPhongTam').value;
-    const moTaChung = this.formGroup.get('moTaChung').value;
-    const giaTienTheoDem = this.formGroup.get('giaTienTheoDem').value;
-    const trangThai = this.formGroup.get('trangThai').value;
-    const hostId = this.formGroup.get('hostId').value;
-    const categoryHouseId = this.formGroup.get('categoryHouseId').value;
-    const categoryRoomId = this.formGroup.get('categoryRoomId').value;
+    this.house.tenNha = this.formGroup.get('tenNha').value;
+    this.house.diaChi = this.formGroup.get('diaChi').value;
+    this.house.soLuongPhongNgu = this.formGroup.get('soLuongPhongNgu').value;
+    this.house.soLuongPhongTam = this.formGroup.get('soLuongPhongTam').value;
+    this.house.moTaChung = this.formGroup.get('moTaChung').value;
+    this.house.giaTienTheoDem = this.formGroup.get('giaTienTheoDem').value;
+    this.house.trangThai = this.formGroup.get('trangThai').value;
+    // this.house.host =  this.formGroup.get('host').value;
+    this.house.categoryHouse = this.formGroup.get('categoryHouse').value;
+    this.house.categoryRoom =  this.formGroup.get('categoryRoom').value;
+    this.house.picture = this.arrayPicture;
     if (this.isDone === true) {
-      this.componentsService.addHouse(tenNha, diaChi, soLuongPhongNgu, soLuongPhongTam,
-        moTaChung, giaTienTheoDem, trangThai, hostId, categoryHouseId, categoryRoomId, this.arrayPicture).subscribe(result => {
+      this.componentsService.addHouse(this.house).subscribe(result => {
         this.isShow = true;
         this.isSuccess = true;
         this.message = 'Thêm thành công!';
@@ -133,7 +167,7 @@ export class AddHouseComponent implements OnInit {
     });
   }
 
-  onClick(){
+  onClick() {
     myTest();
   }
 

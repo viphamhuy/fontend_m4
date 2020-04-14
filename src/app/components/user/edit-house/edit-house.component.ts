@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {ComponentsService} from '../../components.service';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import * as firebase from 'firebase';
-import {Picture} from '../picture';
 import {AngularFireDatabase} from '@angular/fire/database';
+import {Picture} from '../../../interface/picture';
+import {IHouse} from '../../../interface/house';
 
 declare const myTest: any;
 
@@ -21,12 +22,33 @@ export class EditHouseComponent implements OnInit {
   arrayPicture: Picture[] = [];
   categoryHouseList: any[];
   categoryRoomList: any[];
-  house: any;
   message = '';
   isShow = false;
   isSuccess = true;
   isLoading = false;
-  idNha: number;
+  idTest: number;
+  house: IHouse = {
+    idNha: 0,
+    tenNha: '',
+    diaChi: '',
+    soLuongPhongNgu: '',
+    soLuongPhongTam: '',
+    moTaChung: '',
+    giaTienTheoDem: 0,
+    trangThai: '',
+    categoryHouse: {
+      id: 0,
+    },
+    categoryRoom: {
+      id: 0,
+    },
+    host: {
+      idChuNha: 0,
+    },
+    picture: [{
+      tenAnh: ''
+    }]
+  };
   formGroup = new FormGroup({
     tenNha: new FormControl(),
     diaChi: new FormControl(),
@@ -35,10 +57,41 @@ export class EditHouseComponent implements OnInit {
     moTaChung: new FormControl(),
     giaTienTheoDem: new FormControl(),
     trangThai: new FormControl(),
-    idNha: new FormControl(),
-    categoryHouseId: new FormControl(),
-    categoryRoomId: new FormControl()
+    categoryHouse: new FormGroup({
+        id: new FormControl(),
+        name: new FormControl()
+      }
+    ),
+    categoryRoom: new FormGroup({
+        id: new FormControl(),
+        name: new FormControl()
+      }
+    ),
+    user: new FormGroup({
+      id: new FormControl(),
+      userName: new FormControl(),
+      password: new FormControl(),
+      hoTen: new FormControl(),
+      diaChi: new FormControl(),
+      sdt: new FormControl()
+    }),
+    picture: new FormArray([
+    ])
   });
+  get pictureList(): FormArray {
+    return this.formGroup.get('picture') as FormArray;
+  }
+
+  addPicture() {
+    this.pictureList.push(new FormGroup ({
+      idAnh: new FormControl(),
+      tenAnh: new FormControl(),
+    }));
+  }
+
+  removePicture(index: number) {
+    this.pictureList.removeAt(index);
+  }
 
   constructor(private componentsService: ComponentsService, private route: ActivatedRoute, private db: AngularFireDatabase) {
   }
@@ -55,8 +108,8 @@ export class EditHouseComponent implements OnInit {
     });
     this.route.paramMap.subscribe(params => {
       const idSearch = params.get('id');
-      this.componentsService.findById(idSearch).subscribe(house => {
-        this.house = house;
+      this.componentsService.findById(idSearch).subscribe(houses => {
+        this.house = houses;
         this.formGroup.controls.tenNha.setValue(this.house.tenNha);
         this.formGroup.controls.diaChi.setValue(this.house.diaChi);
         this.formGroup.controls.soLuongPhongNgu.setValue(this.house.soLuongPhongNgu);
@@ -64,28 +117,32 @@ export class EditHouseComponent implements OnInit {
         this.formGroup.controls.moTaChung.setValue(this.house.moTaChung);
         this.formGroup.controls.giaTienTheoDem.setValue(this.house.giaTienTheoDem);
         this.formGroup.controls.trangThai.setValue(this.house.trangThai);
-        this.formGroup.controls.categoryHouseId.setValue(this.house.categoryHouse.id);
-        this.formGroup.controls.categoryRoomId.setValue(this.house.categoryRoom.id);
-        this.idNha = Number(idSearch);
+        this.formGroup.controls.categoryHouse.setValue(this.house.categoryHouse);
+        this.formGroup.controls.categoryRoom.setValue(this.house.categoryRoom);
+        for (let i = 0; i < this.house.picture.length; i++) {
+          this.addPicture();
+        }
+        this.formGroup.controls.picture.setValue(this.house.picture);
       });
+      this.idTest = Number(idSearch);
     });
   }
 
 
   edit() {
-    const tenNha = this.formGroup.get('tenNha').value;
-    const diaChi = this.formGroup.get('diaChi').value;
-    const soLuongPhongNgu = this.formGroup.get('soLuongPhongNgu').value;
-    const soLuongPhongTam = this.formGroup.get('soLuongPhongTam').value;
-    const moTaChung = this.formGroup.get('moTaChung').value;
-    const giaTienTheoDem = this.formGroup.get('giaTienTheoDem').value;
-    const trangThai = this.formGroup.get('trangThai').value;
-    const categoryHouseId = this.formGroup.get('categoryHouseId').value;
-    const categoryRoomId = this.formGroup.get('categoryRoomId').value;
-    console.log(this.arrayPicture);
-    this.componentsService.editHouse(tenNha, diaChi,
-      soLuongPhongNgu, soLuongPhongTam, moTaChung, giaTienTheoDem, trangThai, this.idNha,
-      categoryHouseId, categoryRoomId, this.arrayPicture).subscribe(result => {
+    this.house.idNha = this.idTest;
+    this.house.tenNha = this.formGroup.get('tenNha').value;
+    this.house.diaChi = this.formGroup.get('diaChi').value;
+    this.house.soLuongPhongNgu = this.formGroup.get('soLuongPhongNgu').value;
+    this.house.soLuongPhongTam = this.formGroup.get('soLuongPhongTam').value;
+    this.house.moTaChung = this.formGroup.get('moTaChung').value;
+    this.house.giaTienTheoDem = this.formGroup.get('giaTienTheoDem').value;
+    this.house.trangThai = this.formGroup.get('trangThai').value;
+    // this.house.host =  this.formGroup.get('host').value;
+    this.house.categoryHouse = this.formGroup.get('categoryHouse').value;
+    this.house.categoryRoom =  this.formGroup.get('categoryRoom').value;
+    this.house.picture = this.arrayPicture;
+    this.componentsService.editHouse(this.house).subscribe(result => {
       this.isShow = true;
       this.isSuccess = true;
       this.message = 'Sửa thành công!';
@@ -155,8 +212,7 @@ export class EditHouseComponent implements OnInit {
     }
     console.log(this.arrayPicture);
   }
-
-  onClick(){
+  onClick() {
     myTest();
   }
 }

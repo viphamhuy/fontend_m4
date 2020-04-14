@@ -1,0 +1,59 @@
+.note
+{
+  text-align: center;
+  height: 80px;
+  background: -webkit-linear-gradient(left, #0072ff, #138496);
+  font-weight: bold;
+  color: #0072ff;
+  line-height: 60px;
+}
+.form-content
+{
+  padding: 5%;
+}
+.form-control{
+  border-radius:1.5rem;
+}
+.btnSubmit
+{
+  border:none;
+  border-radius:1.5rem;
+  padding: 1%;
+  width: 20%;
+  cursor: pointer;
+  background: #0062cc;
+  color: #fff;
+}
+body {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #222;
+  font-family: 'Montserrat';
+  background-image: url('https://lh3.googleusercontent.com/proxy/wFJnsR5LfTMq7jObtQ1jtDvg9b4YQ3T5Kd_bjzfeO8HmD9qFElJsuhBRrc2yxDkiGXwg3KbFGbqHq3HeMTmdGTGD8zOsD2SoGjAUDyUHfN2NwX8iLRB8L2UfLZDTpNF0y7ON3LuQbrM5VSHivMtqyIGjlDEN7xURo-fDMOCGOUOqLA');
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 115px 0 115px 0px;
+  height: 1000px;
+}
+.container.register-form {
+  background: #00000066;
+  padding: 10px;
+}
+.note p {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+}
+.form {
+  padding: 10px;
+}
+label {
+  color: white;
+  font-weight: bold;
+  font-size: 17px;
+}
+i.fas {
+  color: white;
+  font-size: 13px;
+  margin-right: 10px;
+}

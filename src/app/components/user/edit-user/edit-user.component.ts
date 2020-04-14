@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {ComponentsService} from '../../components.service';
 import {ActivatedRoute} from '@angular/router';
+import {IHost} from '../../../interface/host';
 
 @Component({
   selector: 'app-edit-user',
@@ -10,19 +11,26 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class EditUserComponent implements OnInit {
 
-  id: string;
+  host: IHost = {
+    idChuNha: 0,
+    userName: '',
+    password: '',
+    hoTen: '',
+    diaChi: '',
+    sdt: '',
+  }
+  idtest: any;
   message = '';
   isShow = false;
   isSuccess = true;
   isLoading = false;
-  hostList: any;
-  idChuNha: number;
   formGroup = new FormGroup({
+    idChuNha: new FormControl(),
     userName: new FormControl(),
-    passWord: new FormControl(),
+    password: new FormControl(),
     hoTen: new FormControl(),
     diaChi: new FormControl(),
-    idChuNha: new FormControl()
+    sdt: new FormControl()
   });
   constructor(private componentsService: ComponentsService, private route: ActivatedRoute) { }
 
@@ -30,22 +38,26 @@ export class EditUserComponent implements OnInit {
     this.route.paramMap.subscribe( params => {
       const idSearch = params.get('id');
       this.componentsService.findByIdHost(idSearch).subscribe( result => {
-        this.hostList = result;
-        this.formGroup.controls.userName.setValue(this.hostList.userName);
-        this.formGroup.controls.passWord.setValue(this.hostList.password);
-        this.formGroup.controls.hoTen.setValue(this.hostList.hoTen);
-        this.formGroup.controls.diaChi.setValue(this.hostList.diaChi);
-        this.idChuNha = Number(idSearch);
+        this.host = result;
+        this.formGroup.controls.userName.setValue(this.host.userName);
+        this.formGroup.controls.password.setValue(this.host.password);
+        this.formGroup.controls.hoTen.setValue(this.host.hoTen);
+        this.formGroup.controls.diaChi.setValue(this.host.diaChi);
+        this.formGroup.controls.sdt.setValue(this.host.sdt);
+        this.idtest = Number(idSearch);
       });
     });
   }
   edit() {
     this.isLoading = true;
-    const userName = this.formGroup.get('userName').value;
-    const passWord = this.formGroup.get('passWord').value;
-    const hoTen = this.formGroup.get('hoTen').value;
-    const diaChi = this.formGroup.get('diaChi').value;
-    this.componentsService.editUser(userName, passWord, hoTen, diaChi, this.idChuNha).subscribe(result => {
+    this.host.idChuNha = this.idtest;
+    this.host.userName = this.formGroup.get('userName').value;
+    this.host.password = this.formGroup.get('password').value;
+    this.host.hoTen = this.formGroup.get('hoTen').value;
+    this.host.diaChi = this.formGroup.get('diaChi').value;
+    this.host.sdt = this.formGroup.get('sdt').value;
+    console.log(this.host);
+    this.componentsService.editUser(this.host).subscribe(result => {
       this.isShow = true;
       this.isSuccess = true;
       this.message = 'Sửa thành công!';

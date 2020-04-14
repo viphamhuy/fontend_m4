@@ -81,16 +81,16 @@
 
                   <div class="col-md-12">
 
-                    <div class="form-group col-6 float-left" style="padding: 0px!important;">
+                    <div formGroupName="categoryHouse" class="form-group col-6 float-left" style="padding: 0px!important;">
                       <label>House Categories</label>
-                      <select formControlName="categoryHouseId">
+                      <select formControlName="id">
                         <option *ngFor="let s of categoryHouseList" value="{{s.id}}">{{s.name}}</option>
                       </select>
                     </div>
 
-                    <div class="form-group col-6 float-left" style="padding-right: 0px">
+                    <div formGroupName="categoryRoom" class="form-group col-6 float-left" style="padding-right: 0px">
                       <label>Room Categories</label>
-                      <select formControlName="categoryRoomId">
+                      <select formControlName="id">
                         <option *ngFor="let s of categoryRoomList" value="{{s.id}}">{{s.name}}</option>
                       </select>
 

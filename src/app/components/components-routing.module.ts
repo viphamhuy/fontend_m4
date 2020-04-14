@@ -14,6 +14,8 @@ import {LoginComponent} from './user/login/login.component';
 import {ShowDetailUserComponent} from './user/show-detail-user/show-detail-user.component';
 import {EditUserComponent} from './user/edit-user/edit-user.component';
 import {SignUpComponent} from './user/sign-up/sign-up.component';
+import {LoginHomepageComponent} from './homepage/login-homepage/login-homepage.component';
+import {SignupHomepageComponent} from './homepage/signup-homepage/signup-homepage.component';
 
 const routes: Routes = [{ path: '', component: HomepageComponent },
   {path: 'views/:id', component: ShowDetailsComponent},
@@ -23,9 +25,11 @@ const routes: Routes = [{ path: '', component: HomepageComponent },
   {path: 'user/house-details/:id', component: ShowDetailHouseComponent},
   {path: 'user/edit/:id', component: EditHouseComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'register', component: SignUpComponent},
+  {path: 'signup-host', component: SignUpComponent},
   {path: 'show-detail-user/:id', component: ShowDetailUserComponent},
-  {path: 'edit-user/:id', component: EditUserComponent}];
+  {path: 'edit-user/:id', component: EditUserComponent},
+  {path: 'login-host', component: LoginComponent},
+  {path: 'signup-homepage', component: SignupHomepageComponent}];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

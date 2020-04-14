@@ -56,12 +56,10 @@
                              class="form-control" id="giaTienTheoDem">
                     </div>
                     <div class="form-group">
-                      <input placeholder="Trạng thái *" formControlName="trangThai" type="text" class="form-control"
-                             id="trangThai">
-                    </div>
-                    <div class="form-group" *ngIf="false">
-                      <label for="idhost">Host Id</label>
-                      <input formControlName="hostId" type="text" class="form-control" id="idhost" value="{{idHost}}">
+                      <select formControlName="trangThai">
+                        <option>Trống</option>
+                        <option>Đã thuê</option>
+                      </select>
                     </div>
                     <div class="form-group">
                               <div class="input-group">
@@ -84,16 +82,16 @@
 
                   <div class="col-md-12">
 
-                    <div class="form-group col-6 float-left" style="padding: 0px!important;">
+                    <div formGroupName="categoryHouse" class="form-group col-6 float-left" style="padding: 0px!important;">
                       <label>House Categories</label>
-                      <select formControlName="categoryHouseId">
-                        <option *ngFor="let s of categoryHouseList" value="{{s.id}}">{{s.name}}</option>
+                      <select formControlName="id">
+                        <option  *ngFor="let s of categoryHouseList" value="{{s.id}}">{{s.name}}</option>
                       </select>
                     </div>
 
-                    <div class="form-group col-6 float-left" style="padding-right: 0px">
+                    <div formGroupName="categoryRoom" class="form-group col-6 float-left" style="padding-right: 0px">
                       <label>Room Categories</label>
-                      <select formControlName="categoryRoomId">
+                      <select formControlName="id">
                         <option *ngFor="let s of categoryRoomList" value="{{s.id}}">{{s.name}}</option>
                       </select>
 
@@ -108,7 +106,7 @@
                 </div>
 
               </form>
-        
+
             </div>
 
           </div>

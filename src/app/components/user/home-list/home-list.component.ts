@@ -23,6 +23,7 @@ export class HomeListComponent implements OnInit {
     this.route.paramMap.subscribe( params => {
       const idChuNha = params.get('id');
       this.id = idChuNha;
+      localStorage.setItem('id', this.id);
     });
   }
 

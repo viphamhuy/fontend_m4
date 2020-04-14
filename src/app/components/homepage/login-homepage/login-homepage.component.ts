@@ -1,18 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {ComponentsService} from '../../components.service';
 import {FormControl, FormGroup} from '@angular/forms';
-import {Route, Router} from '@angular/router';
-
-
-
+import {ComponentsService} from '../../components.service';
+import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-login-homepage',
+  templateUrl: './login-homepage.component.html',
+  styleUrls: ['./login-homepage.component.scss']
 })
-export class LoginComponent implements OnInit {
-
+export class LoginHomepageComponent implements OnInit {
 
   formGroup = new FormGroup({
     userName: new FormControl(),
@@ -24,7 +20,6 @@ export class LoginComponent implements OnInit {
   message = '';
   isShow = false;
   isSuccess = true;
-
   constructor(private componentsService: ComponentsService, private route: Router) { }
 
   ngOnInit(): void {
@@ -56,8 +51,5 @@ export class LoginComponent implements OnInit {
       // }
     }
   }
-
-
-
 
 }

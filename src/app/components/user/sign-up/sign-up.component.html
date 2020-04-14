@@ -3,7 +3,7 @@
   <form [formGroup]="formGroup" (ngSubmit)="save()">
   <div class="form">
     <div class="note">
-      <p>SimpleRegister form </p>
+      <p>Đăng kí cho thuê nhà </p>
     </div>
 
     <div class="form-content">
@@ -18,6 +18,11 @@
             <i class="fas fa-globe prefix"></i>
             <label for="address">Address</label>
             <input type="text"  id="address" formControlName="diaChi"  class="form-control" placeholder="Your Address *" value=""/>
+          </div>
+          <div class="form-group">
+            <i class="fas fa-user prefix"></i>
+            <label for="sdt">Số điện thoại</label>
+            <input id="sdt"  formControlName="sdt" type="text" class="form-control" placeholder="Number phone *" value=""/>
           </div>
         </div>
         <div class="col-md-6">

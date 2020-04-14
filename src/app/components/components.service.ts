@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Picture} from './user/picture';
-import {House} from './user/interface/house';
+import {IHouse} from '../interface/house';
+import {IHost} from '../interface/host';
+import {ICustomer} from '../interface/customer';
 
 @Injectable()
 export class ComponentsService {
@@ -33,54 +34,12 @@ export class ComponentsService {
   }
 
 
-  public addHouse(
-    tenNha: string, diaChi: string, soLuongPhongNgu: string,
-    soLuongPhongTam: string, moTaChung: string, giaTienTheoDem: number,
-    trangThai: string, hostId: number, categoryHouseId: number, categoryRoomId: number, listPicture: Picture[]): Observable<any> {
-    const house = {
-      tenNha,
-      diaChi,
-      soLuongPhongNgu,
-      soLuongPhongTam,
-      moTaChung,
-      giaTienTheoDem,
-      trangThai,
-      picture: listPicture,
-      host: {
-        idChuNha: hostId
-      },
-      categoryHouse: {
-        id: categoryHouseId
-      },
-      categoryRoom: {
-        id: categoryRoomId
-      }
-    };
+  public addHouse(house: IHouse): Observable<any> {
     return this.httpClient.post<any>(this.urlApi, house);
   }
 
-  public editHouse(
-    tenNha: string, diaChi: string, soLuongPhongNgu: string,
-    soLuongPhongTam: string, moTaChung: string, giaTienTheoDem: number,
-    trangThai: string, idNha: number, categoryHouseId: number, categoryRoomId: number, listPicture: Picture[]): Observable<any> {
-    const house = {
-      tenNha,
-      diaChi,
-      soLuongPhongNgu,
-      soLuongPhongTam,
-      moTaChung,
-      giaTienTheoDem,
-      trangThai,
-      idNha,
-      picture: listPicture,
-      categoryHouse: {
-        id: categoryHouseId
-      },
-      categoryRoom: {
-        id: categoryRoomId
-      }
-    };
-    return this.httpClient.put<any>(this.urlApi + idNha, house);
+  public editHouse(house: IHouse): Observable<any> {
+    return this.httpClient.put<any>(this.urlApi + house.idNha, house);
   }
 
   public deleteHouse(id: number): Observable<any> {
@@ -106,14 +65,8 @@ export class ComponentsService {
   public listUser(): Observable<any> {
     return this.httpClient.get('http://localhost:5000/api/hosts/');
   }
-  public addUser(userName: string, password: string, hoTen: string, diaChi: string): Observable<any> {
-    const user = {
-      userName,
-      password,
-      hoTen,
-      diaChi
-    };
-    return this.httpClient.post('http://localhost:5000/api/hosts/', user);
+  public addUser(host: IHost): Observable<any> {
+    return this.httpClient.post('http://localhost:5000/api/hosts/', host);
   }
   public findByIdChuNha(id: string): Observable<any> {
     return this.httpClient.get('http://localhost:5000/api/findAllByHost?host=' + id);
@@ -121,15 +74,14 @@ export class ComponentsService {
   public findByIdHost(id: string): Observable<any> {
     return this.httpClient.get('http://localhost:5000/api/hosts/' + id);
   }
-  public editUser(userName: string, password: string, hoTen: string, diaChi: string, idChuNha: number): Observable<any> {
-    const user = {
-      userName,
-      password,
-      hoTen,
-      diaChi,
-      idChuNha
-    };
-    return this.httpClient.put<any>('http://localhost:5000/api/hosts/' + idChuNha, user);
+  public editUser(host: IHost): Observable<any> {
+    return this.httpClient.put<any>('http://localhost:5000/api/hosts/' + host.idChuNha, host);
+  }
+  public addCustomer(customer: ICustomer): Observable<any> {
+    return this.httpClient.post('http://localhost:5000/api/customers/', customer);
+  }
+  public editCustomer(customer: ICustomer): Observable<any> {
+    return this.httpClient.post('http://localhost:5000/api/customers/' + customer.idCustomer, customer);
   }
 }
 
