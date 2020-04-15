@@ -9,13 +9,12 @@ import {Router} from '@angular/router';
   styleUrls: ['./login-homepage.component.scss']
 })
 export class LoginHomepageComponent implements OnInit {
-
   formGroup = new FormGroup({
     userName: new FormControl(),
     password: new FormControl()
   });
-  listUser: any[];
-  userId: number;
+  listCustomer: any[];
+  customerId: any;
   check = false;
   message = '';
   isShow = false;
@@ -23,18 +22,20 @@ export class LoginHomepageComponent implements OnInit {
   constructor(private componentsService: ComponentsService, private route: Router) { }
 
   ngOnInit(): void {
-    this.componentsService.listUser().subscribe( result => {
-      this.listUser = result;
+    this.componentsService.getListCustomer().subscribe( result => {
+      this.listCustomer = result;
     });
   }
   checkUser() {
     const userName = this.formGroup.get('userName').value;
     const password = this.formGroup.get('password').value;
-    for (let i = 0; i < this.listUser.length ; i++) {
-      if (this.listUser[i].userName === userName && this.listUser[i].password === password) {
+    for (let i = 0; i < this.listCustomer.length ; i++) {
+      if (this.listCustomer[i].userName === userName && this.listCustomer[i].password === password) {
         this.check = true;
-        this.userId = this.listUser[i].idChuNha;
-        this.route.navigate(['/user/', this.userId]).then( (e) => {
+        this.customerId = this.listCustomer[i].idCustomer;
+        localStorage.setItem('idCustomer', this.listCustomer[i]);
+        console.log(this.customerId);
+        this.route.navigate(['//', this.customerId ]).then( (e) => {
           if (e) {
             console.log('Navigation is successful!');
           } else {
@@ -51,5 +52,4 @@ export class LoginHomepageComponent implements OnInit {
       // }
     }
   }
-
 }

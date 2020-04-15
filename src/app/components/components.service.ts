@@ -83,5 +83,8 @@ export class ComponentsService {
   public editCustomer(customer: ICustomer): Observable<any> {
     return this.httpClient.post('http://localhost:5000/api/customers/' + customer.idCustomer, customer);
   }
+  public getListCustomer(): Observable<any> {
+    return this.httpClient.get('http://localhost:5000/api/customers/');
+  }
 }
 
